@@ -1,0 +1,122 @@
+= Tutorial de Keycloak
+:toc:
+:toclevels: 3
+:author: Paulo Jerônimo
+:email: paulojeronimo@gmail.com
+
+== Resumo
+
+Este tutorial apresenta um passo a passo prático para a instalação e testes do http://keycloak.org[Keycloak].
+
+Os procedimentos descritos aqui podem ser realizados num ambiente Windows (é sugerido o uso do http://cygwin.com[Cygwin]). 
+
+
+== Pré-requisitos
+
+. Instale o JDK;
+. Instale o Maven;
+
+A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto https://github.com/paulojeronimo/javaee-ambiente. Num ambiente Cygwin podem ser seguidos os passos descritos em https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc.
+ 
+== Instalando o keycloak e testando seus exemplos
+
+Baixe os seguintes arquivos da http://sourceforge.net/projects/keycloak/files/1.2.0.Final/[versão 1.2.0.Final do keycloak]:
+
+. `keycloak-1.2.0.Final.zip`
+. `keycloak-examples-1.2.0.Final.zip`
+
+Descompacte esses dois arquivos.
+
+Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo `keycloak-1.2.0.Final.zip`.
+
+Inicie o keycloak com o seguinte comando:
+
+[source,bash]
+----
+$JBOSS_HOME/bin/standalone.sh
+----
+
+Abra um shell que contenha o Maven no `PATH`.
+
+Entre no diretório (`keycloak-examples-1.2.0.Final`) criado na extração de `keycloak-examples-1.2.0.Final.zip`. 
+
+Vá para o diretório `preconfigured-demo`.
+
+Leia o arquivo `README.md`. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.
+
+Abra a URL http://localhost:8080/auth/admin/master/console/#/create/realm.
+
+Logue-se com o usuário `admin` e a senha `admin`. Será solicitada a troca da senha.
+
+Clique em `Select file` e selecione o arquivo `testrealm.json` que está dentro do diretório em que você está. Em seguida, clique no botão `Upload`.
+
+Volte ao shell. Compile e implante os exemplos com os comandos a seguir. Observe o log do Wildfly enquanto o último comando é executado para averiguar a implantação dos exemplos.
+
+[source,bash]
+----
+mvn clean install
+mvn wildfly:deploy
+----
+
+Acesse a URL http://localhost:8080/customer-portal/customers/view.jsp. Será solicitado um usuário (bburke@redhat.com) e uma senha (password). 
+
+Observe o log do Wildfly.
+
+Observe a tela que será apresentada. Note o valor de `Servelt User Principal`.
+
+Clique em `products`. Observe que não foi solicitada nova autenticacão apesar do contexto ter sido alterado para `product-portal` (esta app também utiliza os mecanismos de segurança do Java EE).
+
+Clique em `Product Listing`. Note que o valor do `User` é o mesmo que o apresentado na tela `customers` para o campo `Servlet User Principal`.
+
+Retorne a tela anterior e clique em `Admin Interface`. Note que será exibida a mensagem `Forbidden`. Isso ocorre pelo fato do usuário logado (bburke@redhat.com) não ter o perfil `admin` (exigido para esse acesso). Detalhe: essa configuração é visível no arquivo `testrealm.json`  (linha 26).
+
+Retorne a URL http://localhost:8080/customer-portal/customers/view.jsp.
+
+Clique em `manage.acct`. Navegue pelos links.
+
+Em `Account` edite os campos `Email`, `Fist name` e `Last name` informando teus próprios dados e clique em `Save`.
+
+Em `Password`, altere a senha e clique em `Save`.
+
+Em `Sessions`, clique em `Log out all sessions`.
+
+Efetue o `Log in` informando teu `email` e senha. Após o logon, note que o `Username` permanece `bburke@redhat.com`.
+
+Observe o log do Wildfly.
+
+Em `Applications` clique em `customer-portal-js`. Em seguida, em `Customer Listing`. Note a alteração do valor dos campos `Email` e `Full Name`.
+
+Clique em `logout`.
+
+Efetue o `Log in` informando `admin` e `password`.
+
+Clique em `products` e, em seguida, em `Admin Interface`. Note que, agora, o acesso a tela de administração não exibe a mensagem `Forbiden` liberando a visualização como deveria ser. Isso ocorre pelo fato do usuário logado (admin) ter o perfil `admin` (exigido para esse acesso). Detalhe: essa configuração é visível no em `testrealm.json` (linha 71).
+
+Vá para a URL http://localhost:8080/customer-portal/. Clique em `Customer Admin Interface`. Note que, agora, também é obtido o acesso a esse link.
+
+Volte para a tela anterior. Clique em `Customer Listing` e, em seguida, em `manage acct`. Note que o usuário logado (admin) não tem permissão para acessar esse link. 
+
+Volte para a tela anterior e clique em `logout`. Note que você estará na página `Customer Portal`. Clique em `Customer Listing`.
+
+Efetue o `Log in` como `bburque@redhat.com` (utilize a nova senha que você criou).
+
+Clique em `manage acct`.
+
+Em `Applications`, clique em `angular-product`.
+
+Clique em `Reload` para exibir a lista de produtos.
+
+Clique em `Sign Out` para voltar a tela de autenticação.
+
+Observe que qualquer tentativa de acesso a URLs protegidas pelo keycloak (como, por exemplo, http://localhost:8080/angular-product/) será redirecionada a tela de autenticação provida pelo keycloak.
+
+== A console de administração do keycloak
+
+A URL http://localhost:8080/auth/admin/index.html possibilita o acesso a interface de administração do keycloak. 
+
+[[NOTE]]
+----
+Você se lembra que trocou a senha para o usuário admin no primeiro acesso a essa interface?
+----
+
+
