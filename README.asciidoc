@@ -110,6 +110,55 @@ Clique em `Sign Out` para voltar a tela de autenticação.
 
 Observe que qualquer tentativa de acesso a URLs protegidas pelo keycloak (como, por exemplo, http://localhost:8080/angular-product/) será redirecionada a tela de autenticação provida pelo keycloak.
 
+== O exemplo basic-auth
+
+O estrutura do exemplo `basic-auth` pode ser observada pela seguinte saída:
+
+----
+$ tree
+.
+|-- basicauthrealm.json
+|-- pom.xml
+|-- README.md
+`-- src
+    `-- main
+        |-- java
+        |   `-- org
+        |       `-- keycloak
+        |           `-- example
+        |               `-- basicauth
+        |                   |-- BasicAuthService.java
+        |                   `-- BasicAuthServiceApplication.java
+        `-- webapp
+            `-- WEB-INF
+                |-- keycloak.json
+                `-- web.xml
+
+9 directories, 7 files
+----
+
+=== Para compilar, implantar e testar a aplicação ===
+
+* Acesse a interface administrativa do keycloak e importe o arquivo `basicauthrealm.json`;
+
+* Compile e implante a aplicação:
+
+[source,bash]
+----
+$ mvn clean package wildfly:jboss
+----
+
+* Teste a aplicação:
+
+[source,bash]
+----
+$ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello
+----
+
+* Observe, na interface administrativa, a existência de uma sessão.
+
+=== Detalhes de funcionamento ===
+
 == A console de administração do keycloak
 
 A URL http://localhost:8080/auth/admin/index.html possibilita o acesso a interface de administração do keycloak. 

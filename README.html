@@ -423,6 +423,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_resumo">Resumo</a></li>
 <li><a href="#_pré_requisitos">Pré-requisitos</a></li>
 <li><a href="#_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o keycloak e testando seus exemplos</a></li>
+<li><a href="#_o_exemplo_basic_auth">O exemplo basic-auth</a>
+<ul class="sectlevel2">
+<li><a href="#_para_compilar_implantar_e_testar_a_aplicação">Para compilar, implantar e testar a aplicação</a></li>
+<li><a href="#_detalhes_de_funcionamento">Detalhes de funcionamento</a></li>
+</ul>
+</li>
 <li><a href="#_a_console_de_administração_do_keycloak">A console de administração do keycloak</a></li>
 </ul>
 </div>
@@ -598,6 +604,79 @@ mvn wildfly:deploy</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_o_exemplo_basic_auth">O exemplo basic-auth</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>O estrutura do exemplo <code>basic-auth</code> pode ser observada pela seguinte saída:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ tree
+.
+|-- basicauthrealm.json
+|-- pom.xml
+|-- README.md
+`-- src
+    `-- main
+        |-- java
+        |   `-- org
+        |       `-- keycloak
+        |           `-- example
+        |               `-- basicauth
+        |                   |-- BasicAuthService.java
+        |                   `-- BasicAuthServiceApplication.java
+        `-- webapp
+            `-- WEB-INF
+                |-- keycloak.json
+                `-- web.xml
+
+9 directories, 7 files</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_para_compilar_implantar_e_testar_a_aplicação">Para compilar, implantar e testar a aplicação</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Acesse a interface administrativa do keycloak e importe o arquivo <code>basicauthrealm.json</code>;</p>
+</li>
+<li>
+<p>Compile e implante a aplicação:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ mvn clean package wildfly:jboss</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Teste a aplicação:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Observe, na interface administrativa, a existência de uma sessão.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_detalhes_de_funcionamento">Detalhes de funcionamento</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_a_console_de_administração_do_keycloak">A console de administração do keycloak</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -613,7 +692,7 @@ mvn wildfly:deploy</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-20 16:11:33 BRT
+Last updated 2015-05-25 17:46:50 BRT
 </div>
 </div>
 </body>
