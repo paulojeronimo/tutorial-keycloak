@@ -422,14 +422,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_resumo">Resumo</a></li>
 <li><a href="#_pré_requisitos">Pré-requisitos</a></li>
-<li><a href="#_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o keycloak e testando seus exemplos</a></li>
+<li><a href="#_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</a></li>
 <li><a href="#_o_exemplo_basic_auth">O exemplo basic-auth</a>
 <ul class="sectlevel2">
-<li><a href="#_para_compilar_implantar_e_testar_a_aplicação">Para compilar, implantar e testar a aplicação</a></li>
-<li><a href="#_detalhes_de_funcionamento">Detalhes de funcionamento</a></li>
+<li><a href="#_compilanando_implantando_e_testando_a_aplicação">Compilanando, implantando e testando a aplicação</a></li>
+<li><a href="#_entendendo">Entendendo</a></li>
 </ul>
 </li>
-<li><a href="#_a_console_de_administração_do_keycloak">A console de administração do keycloak</a></li>
+<li><a href="#_a_console_de_administração_do_keycloak">A console de administração do Keycloak</a></li>
 </ul>
 </div>
 </div>
@@ -459,15 +459,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ol>
 </div>
 <div class="paragraph">
-<p>A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente" class="bare">https://github.com/paulojeronimo/javaee-ambiente</a>. Num ambiente Cygwin podem ser seguidos os passos descritos em <a href="https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc" class="bare">https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc</a>.</p>
+<p>A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>. Num ambiente Cygwin podem ser seguidos os passos descritos em <a href="https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc" class="bare">https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o keycloak e testando seus exemplos</h2>
+<h2 id="_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Baixe os seguintes arquivos da <a href="http://sourceforge.net/projects/keycloak/files/1.2.0.Final/">versão 1.2.0.Final do keycloak</a>:</p>
+<p>Baixe os seguintes arquivos da <a href="http://sourceforge.net/projects/keycloak/files/1.2.0.Final/">versão 1.2.0.Final do Keycloak</a>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -482,11 +482,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Descompacte esses dois arquivos.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Se você tiver montando teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>A instalação do Keycloak pode ser realizada pelo comando <code>keycloak install</code>. Ele ficará instalado no diretório <code>$FERRAMENTAS_DIR</code>.</p>
+</li>
+<li>
+<p>A instalação dos exemplos poderá ser realizada  pelo comando <code>keycloak install examples</code>. Eles estarão disponíveis no diretório <code>$PROJETOS_DIR</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo <code>keycloak-1.2.0.Final.zip</code>.</p>
 </div>
 <div class="paragraph">
-<p>Inicie o keycloak com o seguinte comando:</p>
+<p>Inicie o Keycloak com o seguinte comando:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -530,7 +558,7 @@ mvn wildfly:deploy</code></pre>
 <p>Observe o log do Wildfly.</p>
 </div>
 <div class="paragraph">
-<p>Observe a tela que será apresentada. Note o valor de <code>Servelt User Principal</code>.</p>
+<p>Observe a tela que será apresentada. Note o valor de <code>Servlet User Principal</code>.</p>
 </div>
 <div class="paragraph">
 <p>Clique em <code>products</code>. Observe que não foi solicitada nova autenticacão apesar do contexto ter sido alterado para <code>product-portal</code> (esta app também utiliza os mecanismos de segurança do Java EE).</p>
@@ -599,7 +627,7 @@ mvn wildfly:deploy</code></pre>
 <p>Clique em <code>Sign Out</code> para voltar a tela de autenticação.</p>
 </div>
 <div class="paragraph">
-<p>Observe que qualquer tentativa de acesso a URLs protegidas pelo keycloak (como, por exemplo, <a href="http://localhost:8080/angular-product/" class="bare">http://localhost:8080/angular-product/</a>) será redirecionada a tela de autenticação provida pelo keycloak.</p>
+<p>Observe que qualquer tentativa de acesso a URLs protegidas pelo Keycloak (como, por exemplo, <a href="http://localhost:8080/angular-product/" class="bare">http://localhost:8080/angular-product/</a>) será redirecionada a tela de autenticação provida pelo Keycloak.</p>
 </div>
 </div>
 </div>
@@ -634,53 +662,41 @@ mvn wildfly:deploy</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_para_compilar_implantar_e_testar_a_aplicação">Para compilar, implantar e testar a aplicação</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Acesse a interface administrativa do keycloak e importe o arquivo <code>basicauthrealm.json</code>;</p>
-</li>
-<li>
+<h3 id="_compilanando_implantando_e_testando_a_aplicação">Compilanando, implantando e testando a aplicação</h3>
+<div class="paragraph">
+<p>Acesse a interface administrativa do Keycloak e importe o arquivo <code>basicauthrealm.json</code>.</p>
+</div>
+<div class="paragraph">
 <p>Compile e implante a aplicação:</p>
-</li>
-</ul>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ mvn clean package wildfly:jboss</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p>Teste a aplicação:</p>
-</li>
-</ul>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Observe, na interface administrativa, a existência de uma sessão.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Observe, na interface administrativa do Keycloak, a existência de uma sessão.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_detalhes_de_funcionamento">Detalhes de funcionamento</h3>
+<h3 id="_entendendo">Entendendo</h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_a_console_de_administração_do_keycloak">A console de administração do keycloak</h2>
+<h2 id="_a_console_de_administração_do_keycloak">A console de administração do Keycloak</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A URL <a href="http://localhost:8080/auth/admin/index.html" class="bare">http://localhost:8080/auth/admin/index.html</a> possibilita o acesso a interface de administração do keycloak.</p>
+<p>A URL <a href="http://localhost:8080/auth/admin/index.html" class="bare">http://localhost:8080/auth/admin/index.html</a> possibilita o acesso a interface de administração do Keycloak.</p>
 </div>
 <div id="NOTE" class="listingblock">
 <div class="content">
@@ -692,7 +708,7 @@ mvn wildfly:deploy</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-25 17:46:50 BRT
+Last updated 2015-06-09 17:48:26 BRT
 </div>
 </div>
 </body>

@@ -3,6 +3,7 @@
 :toclevels: 3
 :author: Paulo Jerônimo
 :email: paulojeronimo@gmail.com
+:uri-javaee-ambiente: https://github.com/paulojeronimo/javaee-ambiente
 
 == Resumo
 
@@ -16,20 +17,27 @@ Os procedimentos descritos aqui podem ser realizados num ambiente Windows (é su
 . Instale o JDK;
 . Instale o Maven;
 
-A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto https://github.com/paulojeronimo/javaee-ambiente. Num ambiente Cygwin podem ser seguidos os passos descritos em https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc.
+A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto {uri-javaee-ambiente}[javaee-ambiente]. Num ambiente Cygwin podem ser seguidos os passos descritos em https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc.
  
-== Instalando o keycloak e testando seus exemplos
+== Instalando o Keycloak e testando seus exemplos
 
-Baixe os seguintes arquivos da http://sourceforge.net/projects/keycloak/files/1.2.0.Final/[versão 1.2.0.Final do keycloak]:
+Baixe os seguintes arquivos da http://sourceforge.net/projects/keycloak/files/1.2.0.Final/[versão 1.2.0.Final do Keycloak]:
 
 . `keycloak-1.2.0.Final.zip`
 . `keycloak-examples-1.2.0.Final.zip`
 
 Descompacte esses dois arquivos.
 
+[NOTE]
+====
+. Se você tiver montando teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente]:
+.. A instalação do Keycloak pode ser realizada pelo comando ``keycloak install``. Ele ficará instalado no diretório `$FERRAMENTAS_DIR`.
+.. A instalação dos exemplos poderá ser realizada  pelo comando `keycloak install examples`. Eles estarão disponíveis no diretório `$PROJETOS_DIR`.
+====
+
 Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo `keycloak-1.2.0.Final.zip`.
 
-Inicie o keycloak com o seguinte comando:
+Inicie o Keycloak com o seguinte comando:
 
 [source,bash]
 ----
@@ -62,7 +70,7 @@ Acesse a URL http://localhost:8080/customer-portal/customers/view.jsp. Será sol
 
 Observe o log do Wildfly.
 
-Observe a tela que será apresentada. Note o valor de `Servelt User Principal`.
+Observe a tela que será apresentada. Note o valor de `Servlet User Principal`.
 
 Clique em `products`. Observe que não foi solicitada nova autenticacão apesar do contexto ter sido alterado para `product-portal` (esta app também utiliza os mecanismos de segurança do Java EE).
 
@@ -108,7 +116,7 @@ Clique em `Reload` para exibir a lista de produtos.
 
 Clique em `Sign Out` para voltar a tela de autenticação.
 
-Observe que qualquer tentativa de acesso a URLs protegidas pelo keycloak (como, por exemplo, http://localhost:8080/angular-product/) será redirecionada a tela de autenticação provida pelo keycloak.
+Observe que qualquer tentativa de acesso a URLs protegidas pelo Keycloak (como, por exemplo, http://localhost:8080/angular-product/) será redirecionada a tela de autenticação provida pelo Keycloak.
 
 == O exemplo basic-auth
 
@@ -137,31 +145,31 @@ $ tree
 9 directories, 7 files
 ----
 
-=== Para compilar, implantar e testar a aplicação ===
+=== Compilanando, implantando e testando a aplicação
 
-* Acesse a interface administrativa do keycloak e importe o arquivo `basicauthrealm.json`;
+Acesse a interface administrativa do Keycloak e importe o arquivo `basicauthrealm.json`.
 
-* Compile e implante a aplicação:
+Compile e implante a aplicação:
 
 [source,bash]
 ----
 $ mvn clean package wildfly:jboss
 ----
 
-* Teste a aplicação:
+Teste a aplicação:
 
 [source,bash]
 ----
 $ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello
 ----
 
-* Observe, na interface administrativa, a existência de uma sessão.
+Observe, na interface administrativa do Keycloak, a existência de uma sessão.
 
-=== Detalhes de funcionamento ===
+=== Entendendo 
 
-== A console de administração do keycloak
+== A console de administração do Keycloak
 
-A URL http://localhost:8080/auth/admin/index.html possibilita o acesso a interface de administração do keycloak. 
+A URL http://localhost:8080/auth/admin/index.html possibilita o acesso a interface de administração do Keycloak. 
 
 [[NOTE]]
 ----
