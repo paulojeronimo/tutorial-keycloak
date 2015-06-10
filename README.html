@@ -425,7 +425,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</a></li>
 <li><a href="#_o_exemplo_basic_auth">O exemplo basic-auth</a>
 <ul class="sectlevel2">
-<li><a href="#_compilanando_implantando_e_testando_a_aplicação">Compilanando, implantando e testando a aplicação</a></li>
+<li><a href="#_compilando_implantando_e_testando_a_aplicação">Compilando, implantando e testando a aplicação</a></li>
 <li><a href="#_entendendo">Entendendo</a></li>
 </ul>
 </li>
@@ -479,9 +479,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>Descompacte esses dois arquivos.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -492,14 +489,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Se você tiver montando teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>:</p>
+<p>Se você estiver montando teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>A instalação do Keycloak pode ser realizada pelo comando <code>keycloak install</code>. Ele ficará instalado no diretório <code>$FERRAMENTAS_DIR</code>.</p>
+<p>O download e a descompactação do Keycloak podem ser realizados pelo comando <code>keycloak install</code>. Dessa forma, ele ficará instalado no diretório <code>$FERRAMENTAS_DIR</code>.</p>
 </li>
 <li>
-<p>A instalação dos exemplos poderá ser realizada  pelo comando <code>keycloak install examples</code>. Eles estarão disponíveis no diretório <code>$PROJETOS_DIR</code>.</p>
+<p>O download e a extração dos exemplos podem ser realizados pelo comando <code>keycloak install examples</code>. Eles estarão disponíveis no diretório <code>$PROJETOS_DIR</code>.</p>
 </li>
 </ol>
 </div>
@@ -509,6 +506,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Descompacte esses dois arquivos.</p>
 </div>
 <div class="paragraph">
 <p>Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo <code>keycloak-1.2.0.Final.zip</code>.</p>
@@ -662,7 +662,7 @@ mvn wildfly:deploy</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_compilanando_implantando_e_testando_a_aplicação">Compilanando, implantando e testando a aplicação</h3>
+<h3 id="_compilando_implantando_e_testando_a_aplicação">Compilando, implantando e testando a aplicação</h3>
 <div class="paragraph">
 <p>Acesse a interface administrativa do Keycloak e importe o arquivo <code>basicauthrealm.json</code>.</p>
 </div>
@@ -708,7 +708,7 @@ mvn wildfly:deploy</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-09 17:48:26 BRT
+Last updated 2015-06-10 09:16:45 BRT
 </div>
 </div>
 </body>

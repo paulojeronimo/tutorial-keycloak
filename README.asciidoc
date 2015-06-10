@@ -26,14 +26,14 @@ Baixe os seguintes arquivos da http://sourceforge.net/projects/keycloak/files/1.
 . `keycloak-1.2.0.Final.zip`
 . `keycloak-examples-1.2.0.Final.zip`
 
-Descompacte esses dois arquivos.
-
 [NOTE]
 ====
-. Se você tiver montando teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente]:
-.. A instalação do Keycloak pode ser realizada pelo comando ``keycloak install``. Ele ficará instalado no diretório `$FERRAMENTAS_DIR`.
-.. A instalação dos exemplos poderá ser realizada  pelo comando `keycloak install examples`. Eles estarão disponíveis no diretório `$PROJETOS_DIR`.
+. Se você estiver montando teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente]:
+.. O download e a descompactação do Keycloak podem ser realizados pelo comando ``keycloak install``. Dessa forma, ele ficará instalado no diretório `$FERRAMENTAS_DIR`.
+.. O download e a extração dos exemplos podem ser realizados pelo comando `keycloak install examples`. Eles estarão disponíveis no diretório `$PROJETOS_DIR`.
 ====
+
+Descompacte esses dois arquivos.
 
 Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo `keycloak-1.2.0.Final.zip`.
 
@@ -145,7 +145,7 @@ $ tree
 9 directories, 7 files
 ----
 
-=== Compilanando, implantando e testando a aplicação
+=== Compilando, implantando e testando a aplicação
 
 Acesse a interface administrativa do Keycloak e importe o arquivo `basicauthrealm.json`.
 
