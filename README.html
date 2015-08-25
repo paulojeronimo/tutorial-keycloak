@@ -430,6 +430,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_a_console_de_administração_do_keycloak">A console de administração do Keycloak</a></li>
+<li><a href="#_baixando_e_compilando_os_fontes_do_keycloak">Baixando e compilando os fontes do Keycloak</a>
+<ul class="sectlevel2">
+<li><a href="#_utilizando_uma_versão_específica">Utilizando uma versão específica</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -705,10 +710,33 @@ mvn wildfly:deploy</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_baixando_e_compilando_os_fontes_do_keycloak">Baixando e compilando os fontes do Keycloak</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_utilizando_uma_versão_específica">Utilizando uma versão específica</h3>
+<div class="paragraph">
+<p>Para gerar a versão 1.4.0.Final:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">git clone https://github.com/keycloak/keycloak
+cd keycloak
+git tag
+git checkout 1.4.0.Final
+mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mais detalhes sobre como contribuir na solução de um bug, gerar um release, etc, podem ser obtidos na página <a href="https://github.com/keycloak/keycloak/blob/master/misc/HackingOnKeycloak.md">HackingOnKeycloak.md</a>.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-10 09:16:45 BRT
+Last updated 2015-08-25 11:27:33 BRT
 </div>
 </div>
 </body>

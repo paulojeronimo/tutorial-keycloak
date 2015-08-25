@@ -176,4 +176,19 @@ A URL http://localhost:8080/auth/admin/index.html possibilita o acesso a interfa
 Você se lembra que trocou a senha para o usuário admin no primeiro acesso a essa interface?
 ----
 
+== Baixando e compilando os fontes do Keycloak
 
+=== Utilizando uma versão específica
+
+Para gerar a versão 1.4.0.Final:
+
+[source,bash]
+----
+git clone https://github.com/keycloak/keycloak
+cd keycloak
+git tag
+git checkout 1.4.0.Final
+mvn install
+----
+
+Mais detalhes sobre como contribuir na solução de um bug, gerar um release, etc, podem ser obtidos na página https://github.com/keycloak/keycloak/blob/master/misc/HackingOnKeycloak.md[HackingOnKeycloak.md].
