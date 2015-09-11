@@ -4,53 +4,63 @@
 :author: Paulo Jerônimo
 :email: paulojeronimo@gmail.com
 :uri-javaee-ambiente: https://github.com/paulojeronimo/javaee-ambiente
+:keycloak-version: 1.4.0.Final
 
 == Resumo
 
-Este tutorial apresenta um passo a passo prático para a instalação e testes do http://keycloak.org[Keycloak].
+Este tutorial apresenta um passo a passo prático para a instalação e testes do http://keycloak.org[Keycloak] {keycloak-version}.
 
-Os procedimentos descritos aqui podem ser realizados num ambiente Windows (é sugerido o uso do http://cygwin.com[Cygwin]). 
+Os procedimentos descritos aqui podem ser realizados num ambiente Linux, OS X ou Windows mas, nesse último caso, você precisará instalar o http://cygwin.com[Cygwin] para não precisar fazer nenhuma adaptação nos comandos apresentados. A instalalação do Cygwin para a execução deste tutorial deve ser realizada conforme os passos descritos na página https://github.com/paulojeronimo/dicas-windows/blob/master/instalacao-cygwin.asciidoc[instalacao-cygwin.asciidoc] 
 
 
 == Pré-requisitos
 
-. Instale o JDK;
-. Instale o Maven;
+Para executar os passos deste tutorial precisará ter instalado em tua máquina:
 
-A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto {uri-javaee-ambiente}[javaee-ambiente]. Num ambiente Cygwin podem ser seguidos os passos descritos em https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc.
- 
-== Instalando o Keycloak e testando seus exemplos
-
-Baixe os seguintes arquivos da http://sourceforge.net/projects/keycloak/files/1.2.0.Final/[versão 1.2.0.Final do Keycloak]:
-
-. `keycloak-1.2.0.Final.zip`
-. `keycloak-examples-1.2.0.Final.zip`
+. O JDK (este tutorial foi testado com a versão 1.8.0_60);
+. O Maven (este tutorial foi testado com a versão 3.3.3);
 
 [NOTE]
 ====
-. Se você estiver montando teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente]:
-.. O download e a descompactação do Keycloak podem ser realizados pelo comando ``keycloak install``. Dessa forma, ele ficará instalado no diretório `$FERRAMENTAS_DIR`.
-.. O download e a extração dos exemplos podem ser realizados pelo comando `keycloak install examples`. Eles estarão disponíveis no diretório `$PROJETOS_DIR`.
+A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto {uri-javaee-ambiente}[javaee-ambiente].
 ====
 
-Descompacte esses dois arquivos.
+== Instalando o Keycloak e testando seus exemplos
 
-Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo `keycloak-1.2.0.Final.zip`.
+Baixe o http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118[instalador de desenvolvimento] (arquivo http://downloads.jboss.org/keycloak/{keycloak-version}/keycloak-demo-{keycloak-version}.tar.gz[keycloak-demo-{keycloak-version}.tar.gz]). Esse arquivo contém tudo o que é necessário para a execução dos exemplos desse tutorial. Isso inclui um servidor Wildfly 9.0.0.Final com o servidor Keycloak e seus adaptadores já configurados.
+
+[NOTE]
+====
+Se você montou teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente] o download e a descompactação do instalador de desenvolvimento do keycloak pode ser realizado pelo comando ``keycloak install demo``. Dessa forma, ele ficará instalado no diretório configurado para a variável `FERRAMENTAS_DIR`.
+====
+
+Descompacte esse arquivo. __Você pode utilizar o comando abaixo:__
+[source,bash,subs="attributes"]
+----
+tar xvfz keycloak-demo-{keycloak-version}.tar.gz
+----
+
+Ajuste o valor da variável JBOSS_HOME da seguinte forma:
+[source,bash,subs="attributes"]
+----
+export JBOSS_HOME=$PWD/keycloak-demo-{keycloak-version}/keycloak
+----
 
 Inicie o Keycloak com o seguinte comando:
-
 [source,bash]
 ----
-$JBOSS_HOME/bin/standalone.sh
+$JBOSS_HOME/bin/standalone.sh &
 ----
 
 Abra um shell que contenha o Maven no `PATH`.
 
-Entre no diretório (`keycloak-examples-1.2.0.Final`) criado na extração de `keycloak-examples-1.2.0.Final.zip`. 
+Vá para o diretório `$JBOSS_HOME/../examples/preconfigured-demo` e leia o arquivo `README.md`. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.
 
-Vá para o diretório `preconfigured-demo`.
-
-Leia o arquivo `README.md`. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.
+[source,bash]
+----
+cd $JBOSS_HOME/../examples/preconfigured-demo
+view README.md
+----
 
 Abra a URL http://localhost:8080/auth/admin/master/console/#/create/realm.
 
@@ -76,7 +86,12 @@ Clique em `products`. Observe que não foi solicitada nova autenticacão apesar 
 
 Clique em `Product Listing`. Note que o valor do `User` é o mesmo que o apresentado na tela `customers` para o campo `Servlet User Principal`.
 
-Retorne a tela anterior e clique em `Admin Interface`. Note que será exibida a mensagem `Forbidden`. Isso ocorre pelo fato do usuário logado (bburke@redhat.com) não ter o perfil `admin` (exigido para esse acesso). Detalhe: essa configuração é visível no arquivo `testrealm.json`  (linha 26).
+Retorne a tela anterior e clique em `Admin Interface`. Note que será exibida a mensagem `Forbidden`. Isso ocorre pelo fato do usuário logado (bburke@redhat.com) não ter o perfil `admin` (exigido para esse acesso). Detalhe: essa configuração é visível no arquivo `testrealm.json`  (linha 25):
+
+----
+$ sed -n 25p testrealm.json
+            "realmRoles": [ "user" ],
+----
 
 Retorne a URL http://localhost:8080/customer-portal/customers/view.jsp.
 
@@ -153,14 +168,14 @@ Compile e implante a aplicação:
 
 [source,bash]
 ----
-$ mvn clean package wildfly:jboss
+mvn clean package wildfly:jboss
 ----
 
 Teste a aplicação:
 
 [source,bash]
 ----
-$ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello
+curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello
 ----
 
 Observe, na interface administrativa do Keycloak, a existência de uma sessão.
@@ -171,7 +186,7 @@ Observe, na interface administrativa do Keycloak, a existência de uma sessão.
 
 A URL http://localhost:8080/auth/admin/index.html possibilita o acesso a interface de administração do Keycloak. 
 
-[[NOTE]]
+[NOTE]
 ----
 Você se lembra que trocou a senha para o usuário admin no primeiro acesso a essa interface?
 ----
@@ -180,14 +195,14 @@ Você se lembra que trocou a senha para o usuário admin no primeiro acesso a es
 
 === Utilizando uma versão específica
 
-Para gerar a versão 1.4.0.Final:
+Para gerar a versão {keycloak-version}:
 
-[source,bash]
+[source,bash,subs="attributes"]
 ----
 git clone https://github.com/keycloak/keycloak
 cd keycloak
 git tag
-git checkout 1.4.0.Final
+git checkout {keycloak-version}
 mvn install
 ----
 

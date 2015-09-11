@@ -443,44 +443,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_resumo">Resumo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Este tutorial apresenta um passo a passo prático para a instalação e testes do <a href="http://keycloak.org">Keycloak</a>.</p>
+<p>Este tutorial apresenta um passo a passo prático para a instalação e testes do <a href="http://keycloak.org">Keycloak</a> 1.4.0.Final.</p>
 </div>
 <div class="paragraph">
-<p>Os procedimentos descritos aqui podem ser realizados num ambiente Windows (é sugerido o uso do <a href="http://cygwin.com">Cygwin</a>).</p>
+<p>Os procedimentos descritos aqui podem ser realizados num ambiente Linux, OS X ou Windows mas, nesse último caso, você precisará instalar o <a href="http://cygwin.com">Cygwin</a> para não precisar fazer nenhuma adaptação nos comandos apresentados. A instalalação do Cygwin para a execução deste tutorial deve ser realizada conforme os passos descritos na página <a href="https://github.com/paulojeronimo/dicas-windows/blob/master/instalacao-cygwin.asciidoc">instalacao-cygwin.asciidoc</a></p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_pré_requisitos">Pré-requisitos</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Instale o JDK;</p>
-</li>
-<li>
-<p>Instale o Maven;</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
-<p>A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>. Num ambiente Cygwin podem ser seguidos os passos descritos em <a href="https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc" class="bare">https://github.com/paulojeronimo/javaee-ambiente/blob/master/cygwin.asciidoc</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Baixe os seguintes arquivos da <a href="http://sourceforge.net/projects/keycloak/files/1.2.0.Final/">versão 1.2.0.Final do Keycloak</a>:</p>
+<p>Para executar os passos deste tutorial precisará ter instalado em tua máquina:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>keycloak-1.2.0.Final.zip</code></p>
+<p>O JDK (este tutorial foi testado com a versão 1.8.0_60);</p>
 </li>
 <li>
-<p><code>keycloak-examples-1.2.0.Final.zip</code></p>
+<p>O Maven (este tutorial foi testado com a versão 3.3.3);</p>
 </li>
 </ol>
 </div>
@@ -491,52 +473,70 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Note</div>
 </td>
 <td class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Se você estiver montando teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>O download e a descompactação do Keycloak podem ser realizados pelo comando <code>keycloak install</code>. Dessa forma, ele ficará instalado no diretório <code>$FERRAMENTAS_DIR</code>.</p>
-</li>
-<li>
-<p>O download e a extração dos exemplos podem ser realizados pelo comando <code>keycloak install examples</code>. Eles estarão disponíveis no diretório <code>$PROJETOS_DIR</code>.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS X ou no Windows (+ Cygwin), através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a>.</p>
 </div>
-</li>
-</ol>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Baixe o <a href="http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118">instalador de desenvolvimento</a> (arquivo <a href="http://downloads.jboss.org/keycloak/1.4.0.Final/keycloak-demo-1.4.0.Final.tar.gz">keycloak-demo-1.4.0.Final.tar.gz</a>). Esse arquivo contém tudo o que é necessário para a execução dos exemplos desse tutorial. Isso inclui um servidor Wildfly 9.0.0.Final com o servidor Keycloak e seus adaptadores já configurados.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Se você montou teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a> o download e a descompactação do instalador de desenvolvimento do keycloak pode ser realizado pelo comando <code>keycloak install demo</code>. Dessa forma, ele ficará instalado no diretório configurado para a variável <code>FERRAMENTAS_DIR</code>.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Descompacte esses dois arquivos.</p>
+<p>Descompacte esse arquivo. <em>Você pode utilizar o comando abaixo:</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">tar xvfz keycloak-demo-1.4.0.Final.tar.gz</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Aponte a variável JBOSS_HOME para o diretório criado na descompactação do arquivo <code>keycloak-1.2.0.Final.zip</code>.</p>
+<p>Ajuste o valor da variável JBOSS_HOME da seguinte forma:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">export JBOSS_HOME=$PWD/keycloak-demo-1.4.0.Final/keycloak</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Inicie o Keycloak com o seguinte comando:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$JBOSS_HOME/bin/standalone.sh</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$JBOSS_HOME/bin/standalone.sh &amp;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Abra um shell que contenha o Maven no <code>PATH</code>.</p>
 </div>
 <div class="paragraph">
-<p>Entre no diretório (<code>keycloak-examples-1.2.0.Final</code>) criado na extração de <code>keycloak-examples-1.2.0.Final.zip</code>.</p>
+<p>Vá para o diretório <code>$JBOSS_HOME/../examples/preconfigured-demo</code> e leia o arquivo <code>README.md</code>. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.</p>
 </div>
-<div class="paragraph">
-<p>Vá para o diretório <code>preconfigured-demo</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd $JBOSS_HOME/../examples/preconfigured-demo
+view README.md</code></pre>
 </div>
-<div class="paragraph">
-<p>Leia o arquivo <code>README.md</code>. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.</p>
 </div>
 <div class="paragraph">
 <p>Abra a URL <a href="http://localhost:8080/auth/admin/master/console/#/create/realm" class="bare">http://localhost:8080/auth/admin/master/console/#/create/realm</a>.</p>
@@ -572,7 +572,13 @@ mvn wildfly:deploy</code></pre>
 <p>Clique em <code>Product Listing</code>. Note que o valor do <code>User</code> é o mesmo que o apresentado na tela <code>customers</code> para o campo <code>Servlet User Principal</code>.</p>
 </div>
 <div class="paragraph">
-<p>Retorne a tela anterior e clique em <code>Admin Interface</code>. Note que será exibida a mensagem <code>Forbidden</code>. Isso ocorre pelo fato do usuário logado (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) não ter o perfil <code>admin</code> (exigido para esse acesso). Detalhe: essa configuração é visível no arquivo <code>testrealm.json</code>  (linha 26).</p>
+<p>Retorne a tela anterior e clique em <code>Admin Interface</code>. Note que será exibida a mensagem <code>Forbidden</code>. Isso ocorre pelo fato do usuário logado (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) não ter o perfil <code>admin</code> (exigido para esse acesso). Detalhe: essa configuração é visível no arquivo <code>testrealm.json</code>  (linha 25):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ sed -n 25p testrealm.json
+            "realmRoles": [ "user" ],</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Retorne a URL <a href="http://localhost:8080/customer-portal/customers/view.jsp" class="bare">http://localhost:8080/customer-portal/customers/view.jsp</a>.</p>
@@ -676,7 +682,7 @@ mvn wildfly:deploy</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ mvn clean package wildfly:jboss</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">mvn clean package wildfly:jboss</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -684,7 +690,7 @@ mvn wildfly:deploy</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -703,7 +709,7 @@ mvn wildfly:deploy</code></pre>
 <div class="paragraph">
 <p>A URL <a href="http://localhost:8080/auth/admin/index.html" class="bare">http://localhost:8080/auth/admin/index.html</a> possibilita o acesso a interface de administração do Keycloak.</p>
 </div>
-<div id="NOTE" class="listingblock">
+<div class="listingblock">
 <div class="content">
 <pre>Você se lembra que trocou a senha para o usuário admin no primeiro acesso a essa interface?</pre>
 </div>
@@ -736,7 +742,7 @@ mvn install</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-25 11:27:33 BRT
+Last updated 2015-09-11 11:51:58 BRT
 </div>
 </div>
 </body>
