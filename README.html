@@ -422,7 +422,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_resumo">Resumo</a></li>
 <li><a href="#_pré_requisitos">Pré-requisitos</a></li>
-<li><a href="#_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</a></li>
+<li><a href="#_baixando_e_iniciando_o_keycloak_para_a_execução_de_aplicações_de_demonstração">Baixando e iniciando o Keycloak para a execução de aplicações de demonstração</a></li>
+<li><a href="#_testando_alguns_exemplos_pré_configurados">Testando alguns exemplos pré-configurados</a>
+<ul class="sectlevel2">
+<li><a href="#_importando_o_realm_dos_exemplos">Importando o realm dos exemplos</a></li>
+<li><a href="#_compilando_e_implantando_os_exemplos">Compilando e implantando os exemplos</a></li>
+<li><a href="#_testando_manualmente_os_exemplos_customer_portal_e_product_portal">Testando, manualmente, os exemplos customer-portal e product-portal</a></li>
+<li><a href="#_uma_aplicação_escrita_puramente_em_javascript_customer_portal_js">Uma aplicação escrita puramente em Javascript: customer-portal-js</a></li>
+<li><a href="#_gerenciando_a_conta_do_usuário_logado">Gerenciando a conta do usuário logado</a></li>
+</ul>
+</li>
 <li><a href="#_o_exemplo_basic_auth">O exemplo basic-auth</a>
 <ul class="sectlevel2">
 <li><a href="#_compilando_implantando_e_testando_a_aplicação">Compilando, implantando e testando a aplicação</a></li>
@@ -454,7 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_pré_requisitos">Pré-requisitos</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Para executar os passos deste tutorial precisará ter instalado em tua máquina:</p>
+<p>Para executar os passos deste tutorial você precisará ter instalado em tua máquina:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -483,10 +492,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_instalando_o_keycloak_e_testando_seus_exemplos">Instalando o Keycloak e testando seus exemplos</h2>
+<h2 id="_baixando_e_iniciando_o_keycloak_para_a_execução_de_aplicações_de_demonstração">Baixando e iniciando o Keycloak para a execução de aplicações de demonstração</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Baixe o <a href="http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118">instalador de desenvolvimento</a> (arquivo <a href="http://downloads.jboss.org/keycloak/1.4.0.Final/keycloak-demo-1.4.0.Final.tar.gz">keycloak-demo-1.4.0.Final.tar.gz</a>). Esse arquivo contém tudo o que é necessário para a execução dos exemplos desse tutorial. Isso inclui um servidor Wildfly 9.0.0.Final com o servidor Keycloak e seus adaptadores já configurados.</p>
+<p>Uma forma fácil de testar e aprender os conceitos do Keycloak e baixando o <a href="http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118">instalador de desenvolvimento</a> (arquivo <a href="http://downloads.jboss.org/keycloak/1.4.0.Final/keycloak-demo-1.4.0.Final.tar.gz">keycloak-demo-1.4.0.Final.tar.gz</a>). Esse arquivo contém tudo o que é necessário para a execução dos exemplos desse tutorial. Isso inclui um servidor Wildfly 9.0.0.Final com o servidor Keycloak e seus adaptadores já configurados.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -496,7 +505,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Se você montou teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a> o download e a descompactação do instalador de desenvolvimento do keycloak pode ser realizado pelo comando <code>keycloak install demo</code>. Dessa forma, ele ficará instalado no diretório configurado para a variável <code>FERRAMENTAS_DIR</code>.</p>
+<p>Se você montou teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a> o download e a descompactação do instalador de desenvolvimento do keycloak podem ser realizados pelo comando <code>keycloak install demo</code>. Dessa forma, ele ficará instalado no diretório configurado para a variável <code>FERRAMENTAS_DIR</code>.</p>
 </div>
 </td>
 </tr>
@@ -526,9 +535,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight"><code class="language-bash" data-lang="bash">$JBOSS_HOME/bin/standalone.sh &amp;</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Abra um shell que contenha o Maven no <code>PATH</code>.</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_testando_alguns_exemplos_pré_configurados">Testando alguns exemplos pré-configurados</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Vá para o diretório <code>$JBOSS_HOME/../examples/preconfigured-demo</code> e leia o arquivo <code>README.md</code>. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.</p>
 </div>
@@ -538,6 +549,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 view README.md</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_importando_o_realm_dos_exemplos">Importando o realm dos exemplos</h3>
 <div class="paragraph">
 <p>Abra a URL <a href="http://localhost:8080/auth/admin/master/console/#/create/realm" class="bare">http://localhost:8080/auth/admin/master/console/#/create/realm</a>.</p>
 </div>
@@ -547,8 +560,11 @@ view README.md</code></pre>
 <div class="paragraph">
 <p>Clique em <code>Select file</code> e selecione o arquivo <code>testrealm.json</code> que está dentro do diretório em que você está. Em seguida, clique no botão <code>Upload</code>.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_compilando_e_implantando_os_exemplos">Compilando e implantando os exemplos</h3>
 <div class="paragraph">
-<p>Volte ao shell. Compile e implante os exemplos com os comandos a seguir. Observe o log do Wildfly enquanto o último comando é executado para averiguar a implantação dos exemplos.</p>
+<p>Abra um shell que contenha o Maven no <code>PATH</code>. Compile e implante os exemplos com os comandos a seguir. Observe o log do Wildfly enquanto o último comando é executado para averiguar a implantação dos exemplos.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -556,8 +572,11 @@ view README.md</code></pre>
 mvn wildfly:deploy</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_testando_manualmente_os_exemplos_customer_portal_e_product_portal">Testando, manualmente, os exemplos customer-portal e product-portal</h3>
 <div class="paragraph">
-<p>Acesse a URL <a href="http://localhost:8080/customer-portal/customers/view.jsp" class="bare">http://localhost:8080/customer-portal/customers/view.jsp</a>. Será solicitado um usuário (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) e uma senha (password).</p>
+<p>Acesse a URL <a href="http://localhost:8080/customer-portal/" class="bare">http://localhost:8080/customer-portal/</a>. Clique em <code>Customer Listing</code> e você será redirecionado para a página de autenticação no Keycloak. Informe o usuário (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) e a senha (password).</p>
 </div>
 <div class="paragraph">
 <p>Observe o log do Wildfly.</p>
@@ -572,13 +591,47 @@ mvn wildfly:deploy</code></pre>
 <p>Clique em <code>Product Listing</code>. Note que o valor do <code>User</code> é o mesmo que o apresentado na tela <code>customers</code> para o campo <code>Servlet User Principal</code>.</p>
 </div>
 <div class="paragraph">
-<p>Retorne a tela anterior e clique em <code>Admin Interface</code>. Note que será exibida a mensagem <code>Forbidden</code>. Isso ocorre pelo fato do usuário logado (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) não ter o perfil <code>admin</code> (exigido para esse acesso). Detalhe: essa configuração é visível no arquivo <code>testrealm.json</code>  (linha 25):</p>
+<p>Retorne a tela anterior e clique em <code>Admin Interface</code> (URL: <a href="http://localhost:8080/product-portal/admin/admin.jsp" class="bare">http://localhost:8080/product-portal/admin/admin.jsp</a>). Note que será exibida a mensagem <code>Forbidden</code>. Isso ocorre pelo fato do usuário logado (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) não ter o perfil <code>admin</code> (exigido para esse acesso). Podemos saber disso observando dois arquivos: o primeiro deles é o <code>web.xml</code> que, conforme a saída do comando abaixo, exige que o usuário logado tenha o perfil <code>admin</code> para acessar qualquer URL abaixo de <code>/admin/</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ sed -n 25p testrealm.json
-            "realmRoles": [ "user" ],</pre>
+<pre>$ sed -n 9,17p product-app/src/main/webapp/WEB-INF/web.xml
+    &lt;security-constraint&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;Admins&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;/admin/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;auth-constraint&gt;
+            &lt;role-name&gt;admin&lt;/role-name&gt;
+        &lt;/auth-constraint&gt;
+    &lt;/security-constraint&gt;</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>O segundo arquivo é o <code>testrealm.json</code>. As configurações para o usuário <code>bburke@redhat.com</code> são apresentadas na saída do comando a seguir:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ sed -n 15,29p testrealm.json
+        {
+            "username" : "bburke@redhat.com",
+            "enabled": true,
+            "email" : "bburke@redhat.com",
+            "firstName": "Bill",
+            "lastName": "Burke",
+            "credentials" : [
+                { "type" : "password",
+                    "value" : "password" }
+            ],
+            "realmRoles": [ "user" ],
+            "clientRoles": {
+                "account": [ "manage-account" ]
+            }
+        },</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notamos que, nessa saída, o usuário em questão não possui a role <code>admin</code> (as roles que ele possui estão definidas para o valor de <code>realmRoles</code>).</p>
 </div>
 <div class="paragraph">
 <p>Retorne a URL <a href="http://localhost:8080/customer-portal/customers/view.jsp" class="bare">http://localhost:8080/customer-portal/customers/view.jsp</a>.</p>
@@ -601,23 +654,69 @@ mvn wildfly:deploy</code></pre>
 <div class="paragraph">
 <p>Observe o log do Wildfly.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_uma_aplicação_escrita_puramente_em_javascript_customer_portal_js">Uma aplicação escrita puramente em Javascript: customer-portal-js</h3>
 <div class="paragraph">
-<p>Em <code>Applications</code> clique em <code>customer-portal-js</code>. Em seguida, em <code>Customer Listing</code>. Note a alteração do valor dos campos <code>Email</code> e <code>Full Name</code>.</p>
+<p>Em <code>Applications</code> clique em <code>customer-portal-js</code>. Em seguida, em <code>Customer Listing</code>. Note a alteração do valor dos campos <code>Email</code> e <code>Full Name</code>, <code>Fist</code> e <code>Last</code>, conforme os dados que você editou no passo anterior.</p>
+</div>
+<div class="paragraph">
+<p>A aplicação <a href="http://localhost:8080/customer-portal-js" class="bare">http://localhost:8080/customer-portal-js</a> é uma aplicação totalmente escrita em Javascript. Para ver sua estrutura, sem os arquivos gerados na contrução da aplicação, execute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ (cd customer-app-js; mvn clean)
+$ tree customer-app-js/
+customer-app-js/
+|-- pom.xml
+`-- src
+    `-- main
+        `-- webapp
+            |-- customers
+            |   `-- view.html
+            |-- index.html
+            `-- keycloak.json
+
+4 directories, 4 files</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Clique em <code>logout</code>.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_gerenciando_a_conta_do_usuário_logado">Gerenciando a conta do usuário logado</h3>
 <div class="paragraph">
 <p>Efetue o <code>Log in</code> informando <code>admin</code> e <code>password</code>.</p>
 </div>
 <div class="paragraph">
-<p>Clique em <code>products</code> e, em seguida, em <code>Admin Interface</code>. Note que, agora, o acesso a tela de administração não exibe a mensagem <code>Forbiden</code> liberando a visualização como deveria ser. Isso ocorre pelo fato do usuário logado (admin) ter o perfil <code>admin</code> (exigido para esse acesso). Detalhe: essa configuração é visível no em <code>testrealm.json</code> (linha 71).</p>
+<p>Clique em <code>products</code> e, em seguida, em <code>Admin Interface</code>. Note que, agora, o acesso a tela de administração não exibe a mensagem <code>Forbiden</code> liberando a visualização como deveria ser. Isso ocorre pelo fato do usuário logado (admin) ter o perfil <code>admin</code> (exigido para esse acesso). Detalhe: essa configuração é visível no em <code>testrealm.json</code>. <em>Observe a saída do comando abaixo. Ela imprime as linhas relativas a configuração do  usuário admin no arquivo testrealm.json</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ sed -n 60,74p testrealm.json
+        {
+            "username" : "admin",
+            "enabled": true,
+            "email" : "admin@admin.com",
+            "firstName": "Admin",
+            "lastName": "Burke",
+            "credentials" : [
+                { "type" : "password",
+                    "value" : "password" }
+            ],
+            "realmRoles": [ "user","admin" ],
+            "clientRoles": {
+                "realm-management": [ "realm-admin" ]
+            }
+        },</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Vá para a URL <a href="http://localhost:8080/customer-portal/" class="bare">http://localhost:8080/customer-portal/</a>. Clique em <code>Customer Admin Interface</code>. Note que, agora, também é obtido o acesso a esse link.</p>
 </div>
 <div class="paragraph">
-<p>Volte para a tela anterior. Clique em <code>Customer Listing</code> e, em seguida, em <code>manage acct</code>. Note que o usuário logado (admin) não tem permissão para acessar esse link.</p>
+<p>Volte para a tela anterior. Clique em <code>Customer Listing</code> e, em seguida, em <code>manage acct</code> (URL: <a href="http://localhost:8080/auth/realms/demo/account?referrer=customer-portal" class="bare">http://localhost:8080/auth/realms/demo/account?referrer=customer-portal</a>). Note que o usuário logado (<code>admin</code>) não tem permissão de acesso. A explicação para disso está logo abaixo.</p>
 </div>
 <div class="paragraph">
 <p>Volte para a tela anterior e clique em <code>logout</code>. Note que você estará na página <code>Customer Portal</code>. Clique em <code>Customer Listing</code>.</p>
@@ -626,7 +725,7 @@ mvn wildfly:deploy</code></pre>
 <p>Efetue o <code>Log in</code> como <code>bburque@redhat.com</code> (utilize a nova senha que você criou).</p>
 </div>
 <div class="paragraph">
-<p>Clique em <code>manage acct</code>.</p>
+<p>Clique em <code>manage acct</code>. <em>Note que é possível que esse usuário gerencie sua conta, o que não ocorre para o usuário <code>admin</code>. A explicação está nas roles definidas para esse usuário: ele possui a role <code>manage-accout</code> definida para o acesso ao cliente <code>account</code> (associado a URL base <code>/auth/realms/demo/account</code>). O mesmo não ocorre para o usuário <code>admin</code>.</em></p>
 </div>
 <div class="paragraph">
 <p>Em <code>Applications</code>, clique em <code>angular-product</code>.</p>
@@ -639,6 +738,10 @@ mvn wildfly:deploy</code></pre>
 </div>
 <div class="paragraph">
 <p>Observe que qualquer tentativa de acesso a URLs protegidas pelo Keycloak (como, por exemplo, <a href="http://localhost:8080/angular-product/" class="bare">http://localhost:8080/angular-product/</a>) será redirecionada a tela de autenticação provida pelo Keycloak.</p>
+</div>
+<div class="paragraph">
+<p>Acesse a tela de administração de usuários do <code>realm</code> (<a href="http://localhost:8080/auth/admin/master/console/#/realms/demo/users" class="bare">http://localhost:8080/auth/admin/master/console/#/realms/demo/users</a>). Clique em <code>View all users</code> e, em seguida, no usuário <code>admin</code>. Vá para a aba <code>Role Mappings</code>. Em <code>Client Roles</code> selecione <code>account</code>. Em <code>Available Roles</code> selecione <code>manager-account</code> e clique no botão <code>Add selected</code>. Fazendo isso o usuário <code>admin</code> poderá gerenciar sua conta acessando <a href="http://localhost:8080/auth/realms/demo/account?referrer=customer-portal">manage acct</a>. Verifique!</p>
+</div>
 </div>
 </div>
 </div>
@@ -709,10 +812,19 @@ mvn wildfly:deploy</code></pre>
 <div class="paragraph">
 <p>A URL <a href="http://localhost:8080/auth/admin/index.html" class="bare">http://localhost:8080/auth/admin/index.html</a> possibilita o acesso a interface de administração do Keycloak.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>Você se lembra que trocou a senha para o usuário admin no primeiro acesso a essa interface?</pre>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Você se lembra que trocou a senha para o usuário admin no primeiro acesso a essa interface?</p>
 </div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -742,7 +854,7 @@ mvn install</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-11 11:51:58 BRT
+Last updated 2015-09-11 17:07:05 BRT
 </div>
 </div>
 </body>
