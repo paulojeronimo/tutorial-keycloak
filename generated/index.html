@@ -410,38 +410,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
 <h1>Tutorial de Keycloak</h1>
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
-<span id="email" class="email"><a href="mailto:paulojeronimo@gmail.com">paulojeronimo@gmail.com</a></span><br>
+<span id="email" class="email"><a href="mailto:pj@paulojeronimo.info">pj@paulojeronimo.info</a></span><br>
 </div>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Conteúdo</div>
 <ul class="sectlevel1">
-<li><a href="#_resumo">Resumo</a></li>
-<li><a href="#_pré_requisitos">Pré-requisitos</a></li>
-<li><a href="#_baixando_e_iniciando_o_keycloak_para_a_execução_de_aplicações_de_demonstração">Baixando e iniciando o Keycloak para a execução de aplicações de demonstração</a></li>
-<li><a href="#_testando_alguns_exemplos_pré_configurados">Testando alguns exemplos pré-configurados</a>
+<li><a href="#_resumo">1. Resumo</a></li>
+<li><a href="#_pré_requisitos">2. Pré-requisitos</a></li>
+<li><a href="#_baixando_e_iniciando_o_keycloak_para_a_execução_de_aplicações_de_demonstração">3. Baixando e iniciando o Keycloak para a execução de aplicações de demonstração</a></li>
+<li><a href="#_testando_alguns_exemplos">4. Testando alguns exemplos</a>
 <ul class="sectlevel2">
-<li><a href="#_importando_o_realm_dos_exemplos">Importando o realm dos exemplos</a></li>
-<li><a href="#_compilando_e_implantando_os_exemplos">Compilando e implantando os exemplos</a></li>
-<li><a href="#_testando_manualmente_os_exemplos_customer_portal_e_product_portal">Testando, manualmente, os exemplos customer-portal e product-portal</a></li>
-<li><a href="#_uma_aplicação_escrita_puramente_em_javascript_customer_portal_js">Uma aplicação escrita puramente em Javascript: customer-portal-js</a></li>
-<li><a href="#_gerenciando_a_conta_do_usuário_logado">Gerenciando a conta do usuário logado</a></li>
+<li><a href="#_os_exemplos_pré_configurados">4.1. Os exemplos "pré-configurados"</a>
+<ul class="sectlevel3">
+<li><a href="#_importando_o_realm_dos_exemplos">4.1.1. Importando o realm dos exemplos</a></li>
+<li><a href="#_compilando_e_implantando_os_exemplos">4.1.2. Compilando e implantando os exemplos</a></li>
+<li><a href="#_testando_manualmente_os_exemplos_customer_portal_e_product_portal">4.1.3. Testando, manualmente, os exemplos customer-portal e product-portal</a></li>
+<li><a href="#_uma_aplicação_escrita_puramente_em_javascript_customer_portal_js">4.1.4. Uma aplicação escrita puramente em Javascript: customer-portal-js</a></li>
+<li><a href="#_gerenciando_a_conta_do_usuário_logado">4.1.5. Gerenciando a conta do usuário logado</a></li>
 </ul>
 </li>
-<li><a href="#_o_exemplo_basic_auth">O exemplo basic-auth</a>
-<ul class="sectlevel2">
-<li><a href="#_compilando_implantando_e_testando_a_aplicação">Compilando, implantando e testando a aplicação</a></li>
-<li><a href="#_entendendo">Entendendo</a></li>
+<li><a href="#_o_exemplo_basic_auth">4.2. O exemplo basic-auth</a>
+<ul class="sectlevel3">
+<li><a href="#_compilando_implantando_e_testando_a_aplicação">4.2.1. Compilando, implantando e testando a aplicação</a></li>
 </ul>
 </li>
-<li><a href="#_a_console_de_administração_do_keycloak">A console de administração do Keycloak</a></li>
-<li><a href="#_baixando_e_compilando_os_fontes_do_keycloak">Baixando e compilando os fontes do Keycloak</a>
+</ul>
+</li>
+<li><a href="#_a_console_de_administração_do_keycloak">5. A console de administração do Keycloak</a></li>
+<li><a href="#_baixando_e_compilando_os_fontes_do_keycloak">6. Baixando e compilando os fontes do Keycloak</a>
 <ul class="sectlevel2">
-<li><a href="#_utilizando_uma_versão_específica">Utilizando uma versão específica</a></li>
+<li><a href="#_utilizando_uma_versão_específica">6.1. Utilizando uma versão específica</a></li>
 </ul>
 </li>
 </ul>
@@ -449,10 +452,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_resumo">Resumo</h2>
+<h2 id="_resumo">1. Resumo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Este tutorial apresenta um passo a passo prático para a instalação e testes do <a href="http://keycloak.org">Keycloak</a> 1.4.0.Final.</p>
+<p>Este tutorial apresenta um passo a passo prático para a instalação e testes do <a href="http://keycloak.org">Keycloak</a> 1.5.0.Final.</p>
 </div>
 <div class="paragraph">
 <p>Os procedimentos descritos aqui podem ser realizados num ambiente Linux, OS X ou Windows mas, nesse último caso, você precisará instalar o <a href="http://cygwin.com">Cygwin</a> para não precisar fazer nenhuma adaptação nos comandos apresentados. A instalalação do Cygwin para a execução deste tutorial deve ser realizada conforme os passos descritos na página <a href="https://github.com/paulojeronimo/dicas-windows/blob/master/instalacao-cygwin.asciidoc">instalacao-cygwin.asciidoc</a></p>
@@ -460,7 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pré_requisitos">Pré-requisitos</h2>
+<h2 id="_pré_requisitos">2. Pré-requisitos</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Para executar os passos deste tutorial você precisará ter instalado em tua máquina:</p>
@@ -492,10 +495,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_baixando_e_iniciando_o_keycloak_para_a_execução_de_aplicações_de_demonstração">Baixando e iniciando o Keycloak para a execução de aplicações de demonstração</h2>
+<h2 id="_baixando_e_iniciando_o_keycloak_para_a_execução_de_aplicações_de_demonstração">3. Baixando e iniciando o Keycloak para a execução de aplicações de demonstração</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Uma forma fácil de testar e aprender os conceitos do Keycloak e baixando o <a href="http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118">instalador de desenvolvimento</a> (arquivo <a href="http://downloads.jboss.org/keycloak/1.4.0.Final/keycloak-demo-1.4.0.Final.tar.gz">keycloak-demo-1.4.0.Final.tar.gz</a>). Esse arquivo contém tudo o que é necessário para a execução dos exemplos desse tutorial. Isso inclui um servidor Wildfly 9.0.0.Final com o servidor Keycloak e seus adaptadores já configurados.</p>
+<p>Uma forma fácil de testar e aprender os conceitos do Keycloak é baixando o <a href="http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118">instalador de desenvolvimento</a> (arquivo <a href="http://downloads.jboss.org/keycloak/1.5.0.Final/keycloak-demo-1.5.0.Final.tar.gz">keycloak-demo-1.5.0.Final.tar.gz</a>). Esse arquivo contém parte dos arquivos necessários para a execução dos exemplos deste tutorial. Isso inclui um servidor Wildfly 9.0.1.Final com o servidor Keycloak e seus adaptadores já configurados.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -505,7 +508,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Se você montou teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a> o download e a descompactação do instalador de desenvolvimento do keycloak podem ser realizados pelo comando <code>keycloak install demo</code>. Dessa forma, ele ficará instalado no diretório configurado para a variável <code>FERRAMENTAS_DIR</code>.</p>
+<p>Se você montou teu ambiente através do projeto <a href="https://github.com/paulojeronimo/javaee-ambiente">javaee-ambiente</a> o download e a descompactação do instalador de desenvolvimento do keycloak podem ser realizados pelo comando <code>keycloak_demo install</code>. Dessa forma, ele ficará instalado no diretório configurado para a variável <code>FERRAMENTAS_DIR</code>.</p>
 </div>
 </td>
 </tr>
@@ -516,7 +519,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">tar xvfz keycloak-demo-1.4.0.Final.tar.gz</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">tar xvfz keycloak-demo-1.5.0.Final.tar.gz</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -524,7 +527,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">export JBOSS_HOME=$PWD/keycloak-demo-1.4.0.Final/keycloak</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">export JBOSS_HOME=$PWD/keycloak-demo-1.5.0.Final/keycloak</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -538,8 +541,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_testando_alguns_exemplos_pré_configurados">Testando alguns exemplos pré-configurados</h2>
+<h2 id="_testando_alguns_exemplos">4. Testando alguns exemplos</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_os_exemplos_pré_configurados">4.1. Os exemplos "pré-configurados"</h3>
 <div class="paragraph">
 <p>Vá para o diretório <code>$JBOSS_HOME/../examples/preconfigured-demo</code> e leia o arquivo <code>README.md</code>. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.</p>
 </div>
@@ -549,8 +554,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 view README.md</code></pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_importando_o_realm_dos_exemplos">Importando o realm dos exemplos</h3>
+<div class="sect3">
+<h4 id="_importando_o_realm_dos_exemplos">4.1.1. Importando o realm dos exemplos</h4>
 <div class="paragraph">
 <p>Abra a URL <a href="http://localhost:8080/auth/admin/master/console/#/create/realm" class="bare">http://localhost:8080/auth/admin/master/console/#/create/realm</a>.</p>
 </div>
@@ -561,8 +566,8 @@ view README.md</code></pre>
 <p>Clique em <code>Select file</code> e selecione o arquivo <code>testrealm.json</code> que está dentro do diretório em que você está. Em seguida, clique no botão <code>Upload</code>.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_compilando_e_implantando_os_exemplos">Compilando e implantando os exemplos</h3>
+<div class="sect3">
+<h4 id="_compilando_e_implantando_os_exemplos">4.1.2. Compilando e implantando os exemplos</h4>
 <div class="paragraph">
 <p>Abra um shell que contenha o Maven no <code>PATH</code>. Compile e implante os exemplos com os comandos a seguir. Observe o log do Wildfly enquanto o último comando é executado para averiguar a implantação dos exemplos.</p>
 </div>
@@ -573,10 +578,10 @@ mvn wildfly:deploy</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_testando_manualmente_os_exemplos_customer_portal_e_product_portal">Testando, manualmente, os exemplos customer-portal e product-portal</h3>
+<div class="sect3">
+<h4 id="_testando_manualmente_os_exemplos_customer_portal_e_product_portal">4.1.3. Testando, manualmente, os exemplos customer-portal e product-portal</h4>
 <div class="paragraph">
-<p>Acesse a URL <a href="http://localhost:8080/customer-portal/" class="bare">http://localhost:8080/customer-portal/</a>. Clique em <code>Customer Listing</code> e você será redirecionado para a página de autenticação no Keycloak. Informe o usuário (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) e a senha (password).</p>
+<p>Acesse a URL <a href="http://localhost:8080/customer-portal/" class="bare">http://localhost:8080/customer-portal/</a>. Clique em <code>Customer Listing</code> e você será redirecionado para a página de autenticação no Keycloak. Informe o usuário (<code>bburke@redhat.com</code>) e a senha (<code>password</code>).</p>
 </div>
 <div class="paragraph">
 <p>Observe o log do Wildfly.</p>
@@ -591,7 +596,7 @@ mvn wildfly:deploy</code></pre>
 <p>Clique em <code>Product Listing</code>. Note que o valor do <code>User</code> é o mesmo que o apresentado na tela <code>customers</code> para o campo <code>Servlet User Principal</code>.</p>
 </div>
 <div class="paragraph">
-<p>Retorne a tela anterior e clique em <code>Admin Interface</code> (URL: <a href="http://localhost:8080/product-portal/admin/admin.jsp" class="bare">http://localhost:8080/product-portal/admin/admin.jsp</a>). Note que será exibida a mensagem <code>Forbidden</code>. Isso ocorre pelo fato do usuário logado (<a href="mailto:bburke@redhat.com">bburke@redhat.com</a>) não ter o perfil <code>admin</code> (exigido para esse acesso). Podemos saber disso observando dois arquivos: o primeiro deles é o <code>web.xml</code> que, conforme a saída do comando abaixo, exige que o usuário logado tenha o perfil <code>admin</code> para acessar qualquer URL abaixo de <code>/admin/</code>:</p>
+<p>Retorne a tela anterior e clique em <code>Admin Interface</code> (URL: <a href="http://localhost:8080/product-portal/admin/admin.jsp" class="bare">http://localhost:8080/product-portal/admin/admin.jsp</a>). Note que será exibida a mensagem <code>Forbidden</code>. Isso ocorre pelo fato do usuário logado (<code>bburke@redhat.com</code>) não ter o perfil <code>admin</code> (exigido para esse acesso). Podemos saber disso observando dois arquivos: o primeiro deles é o <code>web.xml</code> que, conforme a saída do comando abaixo, exige que o usuário logado tenha o perfil <code>admin</code> para acessar qualquer URL abaixo de <code>/admin/</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -655,8 +660,8 @@ mvn wildfly:deploy</code></pre>
 <p>Observe o log do Wildfly.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_uma_aplicação_escrita_puramente_em_javascript_customer_portal_js">Uma aplicação escrita puramente em Javascript: customer-portal-js</h3>
+<div class="sect3">
+<h4 id="_uma_aplicação_escrita_puramente_em_javascript_customer_portal_js">4.1.4. Uma aplicação escrita puramente em Javascript: customer-portal-js</h4>
 <div class="paragraph">
 <p>Em <code>Applications</code> clique em <code>customer-portal-js</code>. Em seguida, em <code>Customer Listing</code>. Note a alteração do valor dos campos <code>Email</code> e <code>Full Name</code>, <code>Fist</code> e <code>Last</code>, conforme os dados que você editou no passo anterior.</p>
 </div>
@@ -684,8 +689,8 @@ customer-app-js/
 <p>Clique em <code>logout</code>.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_gerenciando_a_conta_do_usuário_logado">Gerenciando a conta do usuário logado</h3>
+<div class="sect3">
+<h4 id="_gerenciando_a_conta_do_usuário_logado">4.1.5. Gerenciando a conta do usuário logado</h4>
 <div class="paragraph">
 <p>Efetue o <code>Log in</code> informando <code>admin</code> e <code>password</code>.</p>
 </div>
@@ -744,10 +749,8 @@ customer-app-js/
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_o_exemplo_basic_auth">O exemplo basic-auth</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_o_exemplo_basic_auth">4.2. O exemplo basic-auth</h3>
 <div class="paragraph">
 <p>O estrutura do exemplo <code>basic-auth</code> pode ser observada pela seguinte saída:</p>
 </div>
@@ -775,8 +778,8 @@ customer-app-js/
 9 directories, 7 files</pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_compilando_implantando_e_testando_a_aplicação">Compilando, implantando e testando a aplicação</h3>
+<div class="sect3">
+<h4 id="_compilando_implantando_e_testando_a_aplicação">4.2.1. Compilando, implantando e testando a aplicação</h4>
 <div class="paragraph">
 <p>Acesse a interface administrativa do Keycloak e importe o arquivo <code>basicauthrealm.json</code>.</p>
 </div>
@@ -800,14 +803,11 @@ customer-app-js/
 <p>Observe, na interface administrativa do Keycloak, a existência de uma sessão.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_entendendo">Entendendo</h3>
-
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_a_console_de_administração_do_keycloak">A console de administração do Keycloak</h2>
+<h2 id="_a_console_de_administração_do_keycloak">5. A console de administração do Keycloak</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A URL <a href="http://localhost:8080/auth/admin/index.html" class="bare">http://localhost:8080/auth/admin/index.html</a> possibilita o acesso a interface de administração do Keycloak.</p>
@@ -829,19 +829,19 @@ customer-app-js/
 </div>
 </div>
 <div class="sect1">
-<h2 id="_baixando_e_compilando_os_fontes_do_keycloak">Baixando e compilando os fontes do Keycloak</h2>
+<h2 id="_baixando_e_compilando_os_fontes_do_keycloak">6. Baixando e compilando os fontes do Keycloak</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_utilizando_uma_versão_específica">Utilizando uma versão específica</h3>
+<h3 id="_utilizando_uma_versão_específica">6.1. Utilizando uma versão específica</h3>
 <div class="paragraph">
-<p>Para gerar a versão 1.4.0.Final:</p>
+<p>Para gerar a versão 1.5.0.Final:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">git clone https://github.com/keycloak/keycloak
 cd keycloak
 git tag
-git checkout 1.4.0.Final
+git checkout 1.5.0.Final
 mvn install</code></pre>
 </div>
 </div>
@@ -854,7 +854,7 @@ mvn install</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-11 17:07:05 BRT
+Last updated 2015-09-14 16:25:22 BRT
 </div>
 </div>
 </body>

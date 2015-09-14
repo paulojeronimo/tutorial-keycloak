@@ -1,10 +1,14 @@
 = Tutorial de Keycloak
-:toc:
-:toclevels: 3
 :author: Paulo Jerônimo
-:email: paulojeronimo@gmail.com
+:email: pj@paulojeronimo.info
+:toc: right
+:toc-title: Conteúdo
+:toclevels: 4
+:numbered:
+:experimental:
+
 :uri-javaee-ambiente: https://github.com/paulojeronimo/javaee-ambiente
-:keycloak-version: 1.4.0.Final
+:keycloak-version: 1.5.0.Final
 
 == Resumo
 
@@ -26,11 +30,11 @@ A montagem de um ambiente Java EE pode ser realizada rapidamente no Linux, no OS
 
 == Baixando e iniciando o Keycloak para a execução de aplicações de demonstração
 
-Uma forma fácil de testar e aprender os conceitos do Keycloak e baixando o http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118[instalador de desenvolvimento] (arquivo http://downloads.jboss.org/keycloak/{keycloak-version}/keycloak-demo-{keycloak-version}.tar.gz[keycloak-demo-{keycloak-version}.tar.gz]). Esse arquivo contém tudo o que é necessário para a execução dos exemplos desse tutorial. Isso inclui um servidor Wildfly 9.0.0.Final com o servidor Keycloak e seus adaptadores já configurados.
+Uma forma fácil de testar e aprender os conceitos do Keycloak é baixando o http://keycloak.github.io/docs/userguide/html/server-installation.html#d4e118[instalador de desenvolvimento] (arquivo http://downloads.jboss.org/keycloak/{keycloak-version}/keycloak-demo-{keycloak-version}.tar.gz[keycloak-demo-{keycloak-version}.tar.gz]). Esse arquivo contém parte dos arquivos necessários para a execução dos exemplos deste tutorial. Isso inclui um servidor Wildfly 9.0.1.Final com o servidor Keycloak e seus adaptadores já configurados.
 
 [NOTE]
 ====
-Se você montou teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente] o download e a descompactação do instalador de desenvolvimento do keycloak podem ser realizados pelo comando ``keycloak install demo``. Dessa forma, ele ficará instalado no diretório configurado para a variável `FERRAMENTAS_DIR`.
+Se você montou teu ambiente através do projeto {uri-javaee-ambiente}[javaee-ambiente] o download e a descompactação do instalador de desenvolvimento do keycloak podem ser realizados pelo comando ``keycloak_demo install``. Dessa forma, ele ficará instalado no diretório configurado para a variável `FERRAMENTAS_DIR`.
 ====
 
 Descompacte esse arquivo. __Você pode utilizar o comando abaixo:__
@@ -51,8 +55,9 @@ Inicie o Keycloak com o seguinte comando:
 $JBOSS_HOME/bin/standalone.sh &
 ----
 
-== Testando alguns exemplos pré-configurados
+== Testando alguns exemplos
 
+=== Os exemplos "pré-configurados"
 
 Vá para o diretório `$JBOSS_HOME/../examples/preconfigured-demo` e leia o arquivo `README.md`. Os passos descritos a seguir são uma simplificação dos passos apresentados nele.
 
@@ -62,7 +67,7 @@ cd $JBOSS_HOME/../examples/preconfigured-demo
 view README.md
 ----
 
-=== Importando o realm dos exemplos
+==== Importando o realm dos exemplos
 
 Abra a URL http://localhost:8080/auth/admin/master/console/#/create/realm.
 
@@ -70,7 +75,7 @@ Logue-se com o usuário `admin` e a senha `admin`. Será solicitada a troca da s
 
 Clique em `Select file` e selecione o arquivo `testrealm.json` que está dentro do diretório em que você está. Em seguida, clique no botão `Upload`.
 
-=== Compilando e implantando os exemplos
+==== Compilando e implantando os exemplos
 
 Abra um shell que contenha o Maven no `PATH`. Compile e implante os exemplos com os comandos a seguir. Observe o log do Wildfly enquanto o último comando é executado para averiguar a implantação dos exemplos.
 
@@ -80,9 +85,9 @@ mvn clean install
 mvn wildfly:deploy
 ----
 
-=== Testando, manualmente, os exemplos customer-portal e product-portal
+==== Testando, manualmente, os exemplos customer-portal e product-portal
 
-Acesse a URL http://localhost:8080/customer-portal/. Clique em `Customer Listing` e você será redirecionado para a página de autenticação no Keycloak. Informe o usuário (bburke@redhat.com) e a senha (password).
+Acesse a URL http://localhost:8080/customer-portal/. Clique em `Customer Listing` e você será redirecionado para a página de autenticação no Keycloak. Informe o usuário (`bburke@redhat.com`) e a senha (`password`).
 
 Observe o log do Wildfly.
 
@@ -92,7 +97,7 @@ Clique em `products`. Observe que não foi solicitada nova autenticacão apesar 
 
 Clique em `Product Listing`. Note que o valor do `User` é o mesmo que o apresentado na tela `customers` para o campo `Servlet User Principal`.
 
-Retorne a tela anterior e clique em `Admin Interface` (URL: http://localhost:8080/product-portal/admin/admin.jsp). Note que será exibida a mensagem `Forbidden`. Isso ocorre pelo fato do usuário logado (bburke@redhat.com) não ter o perfil `admin` (exigido para esse acesso). Podemos saber disso observando dois arquivos: o primeiro deles é o `web.xml` que, conforme a saída do comando abaixo, exige que o usuário logado tenha o perfil `admin` para acessar qualquer URL abaixo de `/admin/`:
+Retorne a tela anterior e clique em `Admin Interface` (URL: http://localhost:8080/product-portal/admin/admin.jsp). Note que será exibida a mensagem `Forbidden`. Isso ocorre pelo fato do usuário logado (`bburke@redhat.com`) não ter o perfil `admin` (exigido para esse acesso). Podemos saber disso observando dois arquivos: o primeiro deles é o `web.xml` que, conforme a saída do comando abaixo, exige que o usuário logado tenha o perfil `admin` para acessar qualquer URL abaixo de `/admin/`:
 
 ----
 $ sed -n 9,17p product-app/src/main/webapp/WEB-INF/web.xml
@@ -144,7 +149,7 @@ Efetue o `Log in` informando teu `email` e senha. Após o logon, note que o `Use
 
 Observe o log do Wildfly.
 
-=== Uma aplicação escrita puramente em Javascript: customer-portal-js
+==== Uma aplicação escrita puramente em Javascript: customer-portal-js
 
 Em `Applications` clique em `customer-portal-js`. Em seguida, em `Customer Listing`. Note a alteração do valor dos campos `Email` e `Full Name`, `Fist` e `Last`, conforme os dados que você editou no passo anterior.
 
@@ -168,7 +173,7 @@ customer-app-js/
 
 Clique em `logout`.
 
-=== Gerenciando a conta do usuário logado
+==== Gerenciando a conta do usuário logado
 
 Efetue o `Log in` informando `admin` e `password`.
 
@@ -213,7 +218,7 @@ Observe que qualquer tentativa de acesso a URLs protegidas pelo Keycloak (como, 
 
 Acesse a tela de administração de usuários do `realm` (http://localhost:8080/auth/admin/master/console/#/realms/demo/users). Clique em `View all users` e, em seguida, no usuário `admin`. Vá para a aba `Role Mappings`. Em `Client Roles` selecione `account`. Em `Available Roles` selecione `manager-account` e clique no botão `Add selected`. Fazendo isso o usuário `admin` poderá gerenciar sua conta acessando http://localhost:8080/auth/realms/demo/account?referrer=customer-portal[manage acct]. Verifique!
 
-== O exemplo basic-auth
+=== O exemplo basic-auth
 
 O estrutura do exemplo `basic-auth` pode ser observada pela seguinte saída:
 
@@ -240,7 +245,7 @@ $ tree
 9 directories, 7 files
 ----
 
-=== Compilando, implantando e testando a aplicação
+==== Compilando, implantando e testando a aplicação
 
 Acesse a interface administrativa do Keycloak e importe o arquivo `basicauthrealm.json`.
 
@@ -259,8 +264,6 @@ curl http://admin:password@localhost:8080/basicauth/service/echo?value=hello
 ----
 
 Observe, na interface administrativa do Keycloak, a existência de uma sessão.
-
-=== Entendendo 
 
 == A console de administração do Keycloak
 

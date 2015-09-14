@@ -1,0 +1,52 @@
+#!/bin/bash
+# Author: Paulo Jeronimo (email: paulojeronimo@gmail.com, twitter: @paulojeronimo)
+set +x
+
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
+GENDIR="$BASEDIR"/generated
+
+TUT=$(cd $(dirname "$0"); echo $(basename "$PWD"))
+ASCIIDOCTOR_PROJECTS_DIR=${ASCIIDOCTOR_PROJECTS_DIR:-~/Projects/github.com/asciidoctor}
+
+_html() {
+    mkdir -p "$GENDIR"
+    asciidoctor tutorial.asciidoc -o "$GENDIR"/index.html
+}
+
+_pdf() {
+    pushd . &> /dev/null
+    mkdir -p "$ASCIIDOCTOR_PROJECTS_DIR"
+    cd "$ASCIIDOCTOR_PROJECTS_DIR"
+    [ -d asciidoctor-fopub ] || git clone https://github.com/asciidoctor/asciidoctor-fopub
+    popd &> /dev/null
+
+    asciidoctor -b docbook -d book -a data-uri! -o "$GENDIR"/$TUT.xml tutorial.asciidoc
+    fopub="$ASCIIDOCTOR_PROJECTS_DIR"/asciidoctor-fopub/fopub
+    case "$OSTYPE" in
+        cygwin)
+            fopub=$fopub.bat
+            GENDIR=`cygpath -w "$GENDIR"`
+            chmod +x $fopub
+        ;;
+    esac
+    $fopub "$GENDIR"/$TUT.xml 
+    rm "$GENDIR"/$TUT.xml
+}
+
+_clean() {
+    if [ -d "$GENDIR" ]
+    then
+        rm -rf "$GENDIR"/{index.html,$TUT.*}
+        [ "$(find "$GENDIR" -type f | wc -l)" = "0" ] && rm -rf "$GENDIR"
+    fi
+}
+
+OP=${1:-html}
+if type _$OP &> /dev/null 
+then 
+    _$OP
+else 
+    echo "Opção \"$OP\" inexistente!"
+fi
+
+# vim: set ts=4 sw=4 expandtab:
