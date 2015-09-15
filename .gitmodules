@@ -1,0 +1,4 @@
+[submodule "generated"]
+	path = generated
+	url = https://github.com/paulojeronimo/tutorial-keycloak
+	branch = gh-pages

@@ -37,7 +37,7 @@ _clean() {
     if [ -d "$GENDIR" ]
     then
         rm -rf "$GENDIR"/{index.html,$TUT.*}
-        [ "$(find "$GENDIR" -type f | wc -l | xargs)" = "0" ] && rm -rf "$GENDIR"
+        #[ "$(find "$GENDIR" -type f | wc -l | xargs)" = "0" ] && rm -rf "$GENDIR"
     fi
 }
 
