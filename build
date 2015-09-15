@@ -47,6 +47,20 @@ _all() {
     _pdf
 }
 
+_publish() {
+    local msg="Publicação em `date`"
+
+    _all
+
+    cd "$GENDIR"
+    git commit -m $msg
+    git push origin HEAD:gh-pages
+    cd ..
+    git add `basedir "$GENDIR"`
+    git commit -m $msg
+    git push
+}
+
 OP=${1:-html}
 if type _$OP &> /dev/null 
 then 
