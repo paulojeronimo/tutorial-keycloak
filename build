@@ -56,7 +56,7 @@ _publish() {
     git commit -m $msg
     git push origin HEAD:gh-pages
     cd ..
-    git add `basedir "$GENDIR"`
+    git add .
     git commit -m $msg
     git push
 }
