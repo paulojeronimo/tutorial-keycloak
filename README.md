@@ -24,7 +24,7 @@ git submodule update --init
 
 * Em HTML: ``./build``
 * Em PDF: ``./build pdf``
-* Todos: ``./build all``
+* Todos os formatos: ``./build all``
 
 ## Publicação do tutorial online
 

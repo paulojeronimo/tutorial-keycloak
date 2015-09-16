@@ -48,16 +48,16 @@ _all() {
 }
 
 _publish() {
-    local msg="Publicação em `date`"
+    local msg="Publicação em `date +"%d/%m/%Y às %H:%M:%S"`"
 
     _all
 
     cd "$GENDIR"
-    git commit -m $msg
+    git commit -am "$msg"
     git push origin HEAD:gh-pages
     cd ..
-    git add .
-    git commit -m $msg
+    git add "`basename "$GENDIR"`"
+    git commit -m "$msg"
     git push
 }
 
